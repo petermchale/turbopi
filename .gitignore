@@ -14,3 +14,7 @@ local-config.sh
 # Contains a legible laptop screen (home network details, bookmarks).
 # Kept locally, never published.
 images/IMG_20260829_190605071_HDR.jpg
+
+# macOS-only bookmark files; the URLs live in README.md instead.
+# (one of them contains a colon, which breaks checkouts on Windows)
+*.webloc

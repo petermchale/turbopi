@@ -83,6 +83,18 @@ expansion board's red and blue ones):
 
 ---
 
+## Links
+
+- [HiWonder: source code and system image](https://drive.google.com/drive/folders/1Y9FdmRe_h6JPQ0ggJe8bi1GDT4IsESSV)
+  — take **"TurboPi RPi 4B Version System Image"**, *not* the "2501 TurboPi AI
+  Large Model (RPi5)" ones, which are Raspberry Pi 5 only
+- [HiWonder: tutorials](https://drive.google.com/drive/folders/1x5IXJTTF_mz3FnN-iiRB4MxgKbYnIj25)
+- [rartino/turbopi](https://github.com/rartino/turbopi) — third-party notes on
+  the TurboPi. Its README contains the `denyinterfaces` typo described in
+  `recovery/issue-2-comment.md`.
+
+---
+
 ## What's here
 
 | Path | What it is |
@@ -91,7 +103,6 @@ expansion board's red and blue ones):
 | `scripts/` | Working helper scripts (see below) |
 | `recovery/` | Crisis tooling and notes from the August 2026 lockout |
 | `images/` | Photos of the hardware, LEDs, ports |
-| `*.webloc` | Bookmarks: HiWonder source + system image, tutorial, the `rartino/turbopi` repo |
 
 ### `scripts/`
 
