@@ -9,7 +9,31 @@
       "Bash(route -n get *)",
       "Bash(networksetup -get*)",
       "Bash(networksetup -listallhardwareports*)",
-      "Bash(dscacheutil -q *)"
+      "Bash(dscacheutil -q *)",
+      "Bash(git status*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git mv *)",
+      "Bash(git rm *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git ls-files*)",
+      "Bash(git branch*)",
+      "Bash(git remote*)",
+      "Bash(git show *)",
+      "Bash(git init*)",
+      "Bash(git checkout -- *)",
+      "Bash(git rev-parse*)",
+      "Bash(gh repo view*)",
+      "Bash(gh api repos/*)",
+      "Bash(gh auth status*)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(chmod *)",
+      "Bash(sips *)",
+      "Bash(wc *)",
+      "Bash(du *)",
+      "Bash(touch *)"
     ]
   }
 }
