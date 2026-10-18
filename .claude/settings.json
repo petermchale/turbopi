@@ -34,6 +34,7 @@
       "Bash(wc *)",
       "Bash(du *)",
       "Bash(touch *)"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   }
 }
