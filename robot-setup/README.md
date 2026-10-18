@@ -79,9 +79,90 @@ expansion board's red and blue ones):
 
 | Green ACT LED | Meaning |
 |---|---|
-| Irregular flicker | Normal — reading the card fine |
+| Irregular flicker, network fine | Normal — reading the card fine |
+| Irregular flicker, but **both** `eth0` and the hotspot are down | Undervoltage — see [Power and battery](#power-and-battery) |
 | 4 long then 4 short, repeating | Card unreadable |
 | Nothing at all, red PWR on | Not running — suspect power/battery |
+
+Note the second row: a *flickering* ACT does not mean the power is healthy.
+It only means the processor is still running, which it does for a while after
+the network hardware has already dropped out. Judge power by whether both
+network routes died together, not by the LED alone.
+
+A single photograph cannot tell "steady" from "caught mid-flicker" — watch the
+LED for a continuous 30 seconds before concluding anything from it.
+
+---
+
+## Power and battery
+
+**Expect roughly two hours of runtime per charge**, and keep the robot on a
+fresh charge before any long session.
+
+The robot runs on **two 18650 lithium cells in series** (7.4 V nominal) in a
+removable double-bay holder. The cells it shipped with are HiWonder
+`3.7V 18650 1800mAh` — about 13 Wh for the pair, against a Pi 4B drawing
+4–6 W with camera, sensors and Wi-Fi. That is where the two hours comes from.
+It is a property of the hardware, not a fault.
+
+### How it dies, and why it misleads
+
+**A flat battery does not look like a flat battery.** It looks like a network
+fault. As the 5 V rail sags, the hungriest parts of the Pi fail first — the
+ethernet PHY and the Wi-Fi radio — while the CPU carries on. So you see:
+
+- `eth0` loses carrier (the Mac reports `status: inactive`, `media: none`)
+- the `HW-XXXXXXXX` hotspot stops broadcasting
+- the green ACT LED keeps flickering, because the processor is still running
+
+Both network routes dead at once, with the CPU alive, is close to a textbook
+undervoltage signature. It happened on 2026-10-18 and was initially
+misdiagnosed as a loose cable — a loose cable cannot take the hotspot down
+with it. **One cause doing both means power, not networking.**
+
+Confirm it from the Pi, which records throttling events:
+
+    vcgencmd get_throttled
+
+`0x0` means clean. Bit 0 set means under-voltage right now; bit 16 means
+under-voltage has occurred since boot.
+
+### Charging
+
+The cells come **out** of the robot and into the two-bay USB charger — there
+is no in-place charging port. Red means charging, green means done, per bay.
+Switch the robot off before removing cells, and note the orientation; the
+holder is marked ⊕ and ⊖, and the two bays face in opposite directions
+because they are wired in series.
+
+If one bay stays red for hours while the other goes green, that cell is
+degraded. Replace **both** — never run a new cell in series with a tired one.
+
+### Buying replacements
+
+**Specification that fits this holder:**
+
+| | |
+|---|---|
+| Format | 18650, **button top**, **unprotected** |
+| Voltage | **3.7 V** Li-ion (INR/NCR — *not* 3.2 V LiFePO4, which looks identical) |
+| Capacity | 3000–3500 mAh. **Anything advertised above ~3600 mAh is counterfeit.** |
+| Current | 8 A continuous is ample |
+| Quantity | 2, same brand and batch |
+
+The holder's positive contact is a raised dome and the negative is a spring,
+so flat-tops would probably seat — but the cells it ships with are button-top,
+and matching what is known to work avoids the question. Protected cells are
+2–3 mm longer and may not fit at all.
+
+Upgrading to 3500 mAh roughly doubles runtime, to about four hours.
+
+**Buy from battery specialists, not marketplace listings** — counterfeit and
+relabelled 18650s are common. [18650 Battery Store](https://www.18650batterystore.com/products/samsung-35e-button-top)
+(Samsung 35E button-top, 3500 mAh, 8 A), [IMR Batteries](https://www.imrbatteries.com/lg-mj1-18650-3500mah-10a-battery)
+and [Illumn](https://www.illumn.com/18650-lg-inr18650mj1-3500mah-high-discharge.html)
+are all established in this niche. HiWonder sells the charger and the holder
+but **not** the cells.
 
 ---
 
