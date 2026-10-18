@@ -1,0 +1,16 @@
+# Machine-specific values (robot MAC, hotspot name). Copy from
+# local-config.example.sh and fill in your own.
+local-config.sh
+
+# macOS
+.DS_Store
+
+# Claude Code personal overrides
+.claude/settings.local.json
+
+# Scratch output from the scripts
+*.out
+
+# Contains a legible laptop screen (home network details, bookmarks).
+# Kept locally, never published.
+images/IMG_20260829_190605071_HDR.jpg

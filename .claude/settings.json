@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ping *)",
+      "Bash(arp -an*)",
+      "Bash(system_profiler *)",
+      "Bash(nc -z *)",
+      "Bash(diskutil list*)",
+      "Bash(route -n get *)",
+      "Bash(networksetup -get*)",
+      "Bash(networksetup -listallhardwareports*)",
+      "Bash(dscacheutil -q *)"
+    ]
+  }
+}
