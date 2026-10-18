@@ -1,8 +1,9 @@
 #!/bin/bash
 # Read-only network diagnostic. Captures traffic to/from the Pi while probing it.
 # Load machine-specific values (gitignored). See local-config.example.sh
-CONF="$(cd "$(dirname "$0")/.." && pwd)/local-config.sh"
-[ -f "$CONF" ] || { echo "Missing $CONF - copy local-config.example.sh to it and fill it in."; exit 1; }
+d="$(cd "$(dirname "$0")" && pwd)"; CONF=""
+while [ "$d" != "/" ]; do [ -f "$d/local-config.sh" ] && { CONF="$d/local-config.sh"; break; }; d="$(dirname "$d")"; done
+[ -n "$CONF" ] || { echo "No local-config.sh found - copy local-config.example.sh from the repo root and fill it in."; exit 1; }
 . "$CONF"
 
 SP="${TMPDIR:-/tmp}"   # scratch output; not the project folder
